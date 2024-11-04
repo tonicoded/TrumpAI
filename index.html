@@ -17,7 +17,7 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Courier New', monospace;
-    color: #ff9900;
+    color: #fff;
     height: 100%;
     overflow: hidden;
     display: flex;
@@ -70,16 +70,17 @@ body, html {
 }
 
 @keyframes borderGlow {
-    0%, 100% { border-image-source: linear-gradient(to right, red, white, blue); }
-    50% { border-image-source: linear-gradient(to right, blue, white, red); }
+    0%, 100% { border-image-source: linear-gradient(to right, #00ff00, #004d00, #00ff00); }
+    50% { border-image-source: linear-gradient(to right, #004d00, #00ff00, #004d00); }
 }
+
 
 .terminal-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 15px;
-    border-bottom: 1px solid #ff9900;
+    border-bottom: 1px solid #2bff00;
     padding-bottom: 10px;
 }
 .terminal-header img {
@@ -87,12 +88,12 @@ body, html {
     height: auto;
 }
 
-/* Text Animations */
 @keyframes textGlow {
-    0% { color: #ff4500; text-shadow: 0 0 10px #ff4500; }
-    50% { color: #1e90ff; text-shadow: 0 0 10px #1e90ff; }
-    100% { color: #ff9900; text-shadow: 0 0 10px #ff9900; }
+    0% { color: #00ff00; text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00; }
+    50% { color: #00cc00; text-shadow: 0 0 10px #00cc00, 0 0 20px #00cc00, 0 0 30px #00cc00; }
+    100% { color: #00ff00; text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00; }
 }
+
 
 h1 {
     font-size: 28px;
@@ -118,7 +119,7 @@ h1 {
     flex-grow: 1;
     overflow-y: auto;
     padding: 15px;
-    border: 1px solid #ff9900;
+    border: 1px solid #2bff00;
     background-color: rgba(0, 0, 0, 0.2);
     font-size: 18px;
     margin-bottom: 20px;
@@ -133,7 +134,7 @@ h1 {
 }
 
 .terminal-input span {
-    color: #ff9900;
+    color: #2bff00;
     margin-right: 10px;
     font-weight: bold;
     font-size: 18px;
@@ -143,7 +144,7 @@ h1 {
     flex-grow: 1;
     background-color: transparent;
     border: none;
-    color: #ff9900;
+    color: #2bff00;
     font-family: inherit;
     font-size: 18px;
     outline: none;
@@ -285,7 +286,7 @@ h1 {
         <div class="terminal">
             <div class="terminal-header">
                 <img src="images/logo.png" alt="$TRUMPAI Command Center Logo" style="max-width: 100%; height: auto;">
-                <span class="wallet-address" id="wallet-address" title="Click to copy">45thPresidentBTC4EVERMAGAKeepAmericaGreat2024</span>
+                <span class="wallet-address" id="wallet-address" title="Click to copy">0xbed38dd3d06a61da73fa06e23d557ecafd0fb5da</span>
             </div>
             
             <div id="output" class="terminal-output"></div>
