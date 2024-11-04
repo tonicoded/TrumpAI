@@ -312,7 +312,7 @@ body, html {
             output.innerHTML += "Welcome to $TRUMPAI - The Command Center of the AI Trump Coin!<br>";
             output.innerHTML += "$TRUMPAI: The AI that's really winning!<br>";
             output.innerHTML += "Available commands:<br>";
-            output.innerHTML += "about, makeamerica, twitter, telegram, quote, predict, colors, earn, guess, fact, random, clear<br>";
+            output.innerHTML += "about, makeamerica, twitter, telegram, quote, predict, colors, earn, guess, fact, random, clear, apestore, buy, roastme, insult, fortune<br>";
             output.innerHTML += "Try typing one of these commands to start!<br>";
         }
     
@@ -373,6 +373,19 @@ body, html {
                 case 'random':
                     triggerRandomEvent();
                     break;
+                case 'apestore':
+                case 'buy':
+                    openApeStore();
+                    break;
+                case 'roastme':
+                    roastUser();
+                    break;
+                case 'insult':
+                    insultUser();
+                    break;
+                case 'fortune':
+                    displayFortune();
+                    break;
                 case 'clear':
                     output.innerHTML = '';
                     break;
@@ -381,6 +394,12 @@ body, html {
                     break;
             }
             output.scrollTop = output.scrollHeight;
+        }
+    
+        // Function to open Ape Store
+        function openApeStore() {
+            window.open('https://ape.store', '_blank');
+            output.innerHTML += "Opening the Ape Store... Time to go bananas! 🦍<br>";
         }
     
         // Function to display a random Trump quote
@@ -478,6 +497,45 @@ body, html {
             output.innerHTML += `Random Event: ${randomEvent}<br>`;
         }
     
+        // Function to display a funny insult
+        function insultUser() {
+            const insults = [
+                "You're like a low-energy Jeb Bush.",
+                "Even a sleepy Joe could do better!",
+                "You're fake news!",
+                "You must be a loser - only losers say things like that.",
+                "Is that all you've got? Sad!"
+            ];
+            const randomInsult = insults[Math.floor(Math.random() * insults.length)];
+            output.innerHTML += `TRUMPAI says: "${randomInsult}"<br>`;
+        }
+    
+        // Function to roast the user
+        function roastUser() {
+            const roasts = [
+                "Your crypto portfolio must look worse than 2020.",
+                "I've seen better trades come from a magic 8-ball.",
+                "Even the Fed can't inflate your ego enough.",
+                "Your gains are smaller than Marco Rubio's hands.",
+                "I'd say your wallet is big... but I don't lie like that."
+            ];
+            const randomRoast = roasts[Math.floor(Math.random() * roasts.length)];
+            output.innerHTML += `TRUMPAI roast: "${randomRoast}"<br>`;
+        }
+    
+        // Function to display a fortune
+        function displayFortune() {
+            const fortunes = [
+                "Big things are coming. Yuge gains, I tell you.",
+                "You will HODL through the next dip and make it big!",
+                "One day, you'll be on the moon... in spirit, at least.",
+                "A golden opportunity is coming. Make sure you don’t miss it!",
+                "Keep tweeting, success is just one post away!"
+            ];
+            const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+            output.innerHTML += `TRUMPAI fortune: "${randomFortune}"<br>`;
+        }
+    
         // Function to display a funny response for unrecognized commands
         function displayFunnyResponse(cmd) {
             const funnyResponses = [
@@ -498,11 +556,10 @@ body, html {
         const drops = Array.from({ length: columns }, () => 1);
     
         function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Set fill style here to ensure full coverage
-}
-
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Set fill style here to ensure full coverage
+        }
     
         function draw() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
@@ -522,6 +579,7 @@ body, html {
         setInterval(draw, 33);
         window.addEventListener('resize', resizeCanvas);
     </script>
+    
     
 </body>
 </html>
