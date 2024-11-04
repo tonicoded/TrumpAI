@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>$TRUMPAI - An AI Trump on Base</title>
     <meta property="og:title" content="$TRUMPAI - Trump AI">
     <meta property="og:description" content="Join the AI-powered Trump revolution in cryptocurrency with $TRUMPAI!">
@@ -157,98 +157,98 @@
             opacity: 1;
         }
 
-        /* Loading Screen */
         #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    z-index: 9999;
+    text-align: center; /* Center text within the loading screen */
+    padding: 0 20px; /* Add padding for small screen margins */
+}
 
-        .loading-text {
-            font-size: 24px;
-            color: #ff9900;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            animation: textGlow 3s infinite;
-        }
 
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .terminal {
-                width: 90%;
-                height: 80vh;
-                padding: 10px;
-            }
+.loading-text {
+    font-size: 24px;
+    color: #ff9900;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    animation: textGlow 3s infinite;
+}
+@media (max-width: 768px) {
+    .loading-text {
+        font-size: 18px;
+        letter-spacing: 3px;
+    }
+    .terminal {
+        width: 90%;
+        height: 80vh;
+        padding: 10px;
+    }
 
-            h1 {
-                font-size: 18px;
-            }
+    h1 {
+        font-size: 18px;
+    }
 
-            .wallet-address {
-                font-size: 14px;
-            }
+    .wallet-address {
+        font-size: 14px;
+    }
 
-            .terminal-output {
-                font-size: 12px;
-            }
+    .terminal-output {
+        font-size: 12px;
+    }
 
-            .terminal-input {
-                padding: 8px;
-            }
+    .terminal-input {
+        padding: 8px;
+    }
 
-            .terminal-input input {
-                font-size: 12px;
-            }
+    .terminal-input input {
+        font-size: 12px;
+    }
+}
 
-            .loading-text {
-                font-size: 18px;
-            }
-        }
+@media (max-width: 480px) {
+    .loading-text {
+        font-size: 16px;
+        letter-spacing: 2px;
+    }
+    .terminal {
+        width: 100%;
+        height: 75vh;
+        padding: 8px;
+    }
 
-        @media (max-width: 480px) {
-            .terminal {
-                width: 100%;
-                height: 75vh;
-                padding: 8px;
-            }
+    h1 {
+        font-size: 16px;
+    }
 
-            h1 {
-                font-size: 16px;
-            }
+    .wallet-address {
+        font-size: 12px;
+    }
 
-            .wallet-address {
-                font-size: 12px;
-            }
+    .terminal-output {
+        font-size: 10px;
+        padding: 8px;
+    }
 
-            .terminal-output {
-                font-size: 10px;
-                padding: 8px;
-            }
+    .terminal-input span {
+        margin-right: 5px;
+    }
 
-            .terminal-input span {
-                margin-right: 5px;
-            }
+    .terminal-input input {
+        font-size: 10px;
+    }
 
-            .terminal-input input {
-                font-size: 10px;
-            }
-
-            .loading-text {
-                font-size: 16px;
-            }
-
-            .copied-message {
-                font-size: 12px;
-                padding: 8px 16px;
-            }
-        }
+    .copied-message {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+}
     </style>
 </head>
 <body>
@@ -286,16 +286,26 @@
         const walletAddress = document.getElementById('wallet-address');
         const copiedMessage = document.getElementById('copied-message');
         const loadingScreen = document.getElementById('loading-screen');
-
-        // Display Loading Screen
+    
+        let coinCount = 0; // Initialize coin counter
+        let secretNumber = Math.floor(Math.random() * 10) + 1; // Secret number for guessing game
+    
+        // Display Loading Screen and Welcome Message
         window.addEventListener('load', () => {
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
-                output.innerHTML += "Welcome to $TRUMPAI - The Command Center of the AI Trump Coin!<br>";
-                output.innerHTML += "$TRUMPAI: The AI that's really winning!<br>";
+                displayWelcomeMessage();
             }, 3000);
         });
-
+    
+        function displayWelcomeMessage() {
+            output.innerHTML += "Welcome to $TRUMPAI - The Command Center of the AI Trump Coin!<br>";
+            output.innerHTML += "$TRUMPAI: The AI that's really winning!<br>";
+            output.innerHTML += "Available commands:<br>";
+            output.innerHTML += "about, makeamerica, twitter, telegram, quote, predict, colors, earn, guess, fact, random, clear<br>";
+            output.innerHTML += "Try typing one of these commands to start!<br>";
+        }
+    
         // Copy Wallet Address
         walletAddress.addEventListener('click', () => {
             navigator.clipboard.writeText(walletAddress.textContent).then(() => {
@@ -303,7 +313,7 @@
                 setTimeout(() => copiedMessage.classList.remove('show'), 2000);
             });
         });
-
+    
         // Command Processing
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -312,9 +322,12 @@
             handleCommand(cmd.toLowerCase());
             input.value = '';
         });
-
+    
         function handleCommand(cmd) {
-            switch (cmd) {
+            const args = cmd.split(" ");
+            const baseCmd = args[0];
+    
+            switch (baseCmd) {
                 case 'about':
                     output.innerHTML += "$TRUMPAI: The AI-driven coin making crypto great again.<br>";
                     break;
@@ -329,33 +342,162 @@
                     window.open('https://t.me/TrumpAI', '_blank');
                     output.innerHTML += 'Opening Telegram...<br>';
                     break;
+                case 'quote':
+                    displayRandomQuote();
+                    break;
+                case 'predict':
+                    displayPrediction();
+                    break;
+                case 'colors':
+                    cycleBackgroundColors();
+                    break;
+                case 'earn':
+                    earnCoin();
+                    break;
+                case 'guess':
+                    playGuessingGame(args[1]);
+                    break;
+                case 'fact':
+                    displayFakeTrumpFact();
+                    break;
+                case 'random':
+                    triggerRandomEvent();
+                    break;
                 case 'clear':
                     output.innerHTML = '';
                     break;
                 default:
-                    output.innerHTML += "That command makes no sense to me.<br>";
+                    displayFunnyResponse(cmd);
                     break;
             }
             output.scrollTop = output.scrollHeight;
         }
-
+    
+        // Function to display a random Trump quote
+        function displayRandomQuote() {
+            const quotes = [
+                "Make America Great Again!",
+                "We will build a great wall!",
+                "You're fired!",
+                "It’s going to be yuge!",
+                "I have the best words.",
+                "Covfefe.",
+                "I know words. I have the best words."
+            ];
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            output.innerHTML += `Trump says: "${randomQuote}"<br>`;
+        }
+    
+        // Function to display a random prediction (Magic 8-ball style)
+        function displayPrediction() {
+            const predictions = [
+                "Yes, definitely.",
+                "No way!",
+                "Ask again later.",
+                "It’s unclear right now.",
+                "Absolutely!",
+                "I wouldn’t count on it.",
+                "Sure, why not?",
+                "Signs point to yes."
+            ];
+            const randomPrediction = predictions[Math.floor(Math.random() * predictions.length)];
+            output.innerHTML += `Prediction: "${randomPrediction}"<br>`;
+        }
+    
+        // Function to cycle background colors
+        function cycleBackgroundColors() {
+            const colors = ["#ff9900", "#ff4500", "#1e90ff", "#32cd32", "#9400d3"];
+            let colorIndex = 0;
+            const intervalId = setInterval(() => {
+                document.body.style.backgroundColor = colors[colorIndex];
+                colorIndex = (colorIndex + 1) % colors.length;
+            }, 500);
+    
+            setTimeout(() => {
+                clearInterval(intervalId);
+                document.body.style.backgroundColor = "#000"; // Reset to black
+                output.innerHTML += "Background color cycle complete.<br>";
+            }, 5000); // Stop after 5 seconds
+        }
+    
+        // Function to "earn" a fake coin
+        function earnCoin() {
+            coinCount += 1;
+            output.innerHTML += `You earned a coin! Total coins: ${coinCount}<br>`;
+        }
+    
+        // Number guessing game
+        function playGuessingGame(guess) {
+            if (!guess) {
+                output.innerHTML += "Type 'guess [number]' to play. I'm thinking of a number between 1 and 10!<br>";
+                return;
+            }
+            const userGuess = parseInt(guess);
+            if (userGuess === secretNumber) {
+                output.innerHTML += "Congratulations! You guessed it right! Starting a new game...<br>";
+                secretNumber = Math.floor(Math.random() * 10) + 1;
+            } else {
+                output.innerHTML += "Nope! Try again.<br>";
+            }
+        }
+    
+        // Function to display a random, fake Trump fact
+        function displayFakeTrumpFact() {
+            const facts = [
+                "Trump once tried to buy the moon. He was told it wasn't for sale.",
+                "Trump has a golden golf cart at Mar-a-Lago.",
+                "Trump once claimed he invented 'fake news.'",
+                "Trump believes he can talk to eagles. Allegedly, they talk back.",
+                "Trump's hair has its own private security team.",
+                "Trump once declared that he was 'the best AI expert, maybe ever.'"
+            ];
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            output.innerHTML += `Fake Trump Fact: "${randomFact}"<br>`;
+        }
+    
+        // Function to trigger a random event
+        function triggerRandomEvent() {
+            const events = [
+                "A giant golden Trump statue appeared and disappeared!",
+                "A Trump balloon is floating around the terminal!",
+                "The Trump Tower briefly appeared on the screen, then vanished!",
+                "Trump just tweeted, 'I am the best crypto ever!'",
+                "A crowd chanted 'TRUMPAI! TRUMPAI!' for a few seconds and left."
+            ];
+            const randomEvent = events[Math.floor(Math.random() * events.length)];
+            output.innerHTML += `Random Event: ${randomEvent}<br>`;
+        }
+    
+        // Function to display a funny response for unrecognized commands
+        function displayFunnyResponse(cmd) {
+            const funnyResponses = [
+                `Sorry, "${cmd}" isn't a command. Try something more... Trump-worthy.`,
+                `"${cmd}"? Never heard of it. But it sounds like fake news.`,
+                `Did you mean "covfefe"? Because "${cmd}" doesn't make any sense.`,
+                `"${cmd}"? That sounds like something only losers would type.`,
+                `Nice try with "${cmd}", but the TRUMPAI doesn't do that.`
+            ];
+            const randomResponse = funnyResponses[Math.floor(Math.random() * funnyResponses.length)];
+            output.innerHTML += `${randomResponse}<br>`;
+        }
+    
         // Matrix Background Effect
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
         const columns = canvas.width / 20;
         const drops = Array.from({ length: columns }, () => 1);
-
+    
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-
+    
         function draw() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#ff9900';
             ctx.font = '15px monospace';
-
+    
             drops.forEach((drop, i) => {
                 const text = String.fromCharCode(Math.random() * 128);
                 ctx.fillText(text, i * 20, drop * 20);
@@ -363,10 +505,11 @@
                 drops[i]++;
             });
         }
-
+    
         resizeCanvas();
         setInterval(draw, 33);
         window.addEventListener('resize', resizeCanvas);
     </script>
+    
 </body>
 </html>
