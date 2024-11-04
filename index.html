@@ -35,32 +35,34 @@
 
         /* Container for Terminal */
         .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            position: relative;
-            padding: 10px;
-            box-sizing: border-box;
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
 
         .terminal {
-            width: 100%;
-            max-width: 800px;
-            height: 90vh;
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 2px solid;
-            border-image: linear-gradient(to right, red, white, blue) 1;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 0 20px rgba(255, 153, 0, 0.5);
-            animation: borderGlow 5s linear infinite;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-        }
+    width: 100%;
+    max-width: 800px;
+    height: 90vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid;
+    border-image: linear-gradient(to right, red, white, blue) 1;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 0 20px rgba(255, 153, 0, 0.5);
+    animation: borderGlow 5s linear infinite;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    box-sizing: border-box; /* Ensure padding is included in total width */
+}
+
 
         @keyframes borderGlow {
             0%, 100% { border-image-source: linear-gradient(to right, red, white, blue); }
@@ -254,7 +256,7 @@
 <body>
     <!-- Loading Screen -->
     <div id="loading-screen">
-        <div class="loading-text">TRUMP AI preparing the stage...</div>
+        <div class="loading-text">TRUMP AI loading...</div>
     </div>
 
     <!-- Background Matrix Animation -->
@@ -488,9 +490,11 @@
         const drops = Array.from({ length: columns }, () => 1);
     
         function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Set fill style here to ensure full coverage
+}
+
     
         function draw() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
