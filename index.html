@@ -17,7 +17,6 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Courier New', monospace;
-    background-color: #000;
     color: #ff9900;
     height: 100%;
     overflow: hidden;
@@ -27,27 +26,32 @@ body, html {
 }
 
 
-        #matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
+/* Matrix Background */
+#matrix-bg {
+    position: fixed; /* Ensure it stays fixed in the background */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -999; /* Set a very low z-index to keep it far in the background */
+    pointer-events: none; /* Prevent interaction with background */
+}
 
-        /* Container for Terminal */
-        .container {
+/* Container for Terminal */
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 10px;
     box-sizing: border-box;
+    position: relative; /* Ensures the terminal is positioned above #matrix-bg */
+    z-index: 1; /* Ensure container stays on top of #matrix-bg */
 }
 
-
-        .terminal {
+/* Terminal Styling */
+.terminal {
+    z-index: 2; /* Highest z-index to keep terminal on top */
     width: 100%;
     max-width: 800px;
     height: 90vh;
@@ -63,8 +67,9 @@ body, html {
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    box-sizing: border-box; /* Ensure padding is included in total width */
+    box-sizing: border-box; /* Include padding in total width */
 }
+
 
 
         @keyframes borderGlow {
@@ -258,7 +263,7 @@ body, html {
         font-size: 12px;
         padding: 8px 16px;
     }
-}
+
     </style>
 </head>
 <body>
@@ -579,7 +584,6 @@ body, html {
         setInterval(draw, 33);
         window.addEventListener('resize', resizeCanvas);
     </script>
-    
     
 </body>
 </html>
