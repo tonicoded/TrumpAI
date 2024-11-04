@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$TRUMPAI - An AI Trump on Acid</title>
+    <meta property="og:title" content="$TRUMPAI - Trump Ai on Acid">
+    <meta property="og:description" content="Join the AI-powered Trump revolution in cryptocurrency with $TRUMPAI!">
+    <meta property="og:image" content="images/AF8wlvi.png">
+    <meta property="og:url" content="https://acidtrumpai.xyz">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="images/AF8wlvi.png">
+    <link rel="icon" href="images/1omlxby.png" type="image/png">
+
+    <style>
+        /* General Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', monospace;
+            background-color: #000;
+            color: #ff9900;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Container for Terminal */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .terminal {
+            width: 100%;
+            max-width: 800px;
+            height: 90vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid;
+            border-image: linear-gradient(to right, red, white, blue) 1;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 0 20px rgba(255, 153, 0, 0.5);
+            animation: borderGlow 5s linear infinite;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { border-image-source: linear-gradient(to right, red, white, blue); }
+            50% { border-image-source: linear-gradient(to right, blue, white, red); }
+        }
+
+        .terminal-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ff9900;
+            padding-bottom: 10px;
+        }
+
+        /* Text Animations */
+        @keyframes textGlow {
+            0% { color: #ff4500; text-shadow: 0 0 10px #ff4500; }
+            50% { color: #1e90ff; text-shadow: 0 0 10px #1e90ff; }
+            100% { color: #ff9900; text-shadow: 0 0 10px #ff9900; }
+        }
+
+        h1 {
+            font-size: 20px;
+            margin: 0;
+            text-transform: uppercase;
+            text-align: center;
+            animation: textGlow 3s infinite;
+        }
+
+        .wallet-address {
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.3s;
+            text-align: center;
+            word-break: break-all;
+        }
+
+        .wallet-address:hover {
+            color: #ff4500;
+        }
+
+        .terminal-output {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ff9900;
+            background-color: rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .terminal-input {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #333;
+            border-radius: 5px;
+        }
+
+        .terminal-input span {
+            color: #ff9900;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .terminal-input input {
+            flex-grow: 1;
+            background-color: transparent;
+            border: none;
+            color: #ff9900;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+        }
+
+        /* Message Styles */
+        .copied-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 153, 0, 0.9);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none;
+        }
+
+        .copied-message.show {
+            opacity: 1;
+        }
+
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loading-text {
+            font-size: 24px;
+            color: #ff9900;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: textGlow 3s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-text">TRUMP AI preparing the stage...</div>
+    </div>
+
+    <!-- Background Matrix Animation -->
+    <canvas id="matrix-bg" width="1900" height="900"></canvas>
+
+    <!-- Terminal Container -->
+    <div class="container">
+        <div class="terminal">
+            <div class="terminal-header">
+                <h1>$TRUMPAI COMMAND CENTER</h1>
+                <span class="wallet-address" id="wallet-address" title="Click to copy">45thPresidentBTC4EVERMAGAKeepAmericaGreat2024</span>
+            </div>
+            <div id="output" class="terminal-output"></div>
+            <form id="input-form" class="terminal-input">
+                <span>&gt;</span>
+                <input type="text" id="input" placeholder="Enter command (about, makeAmerica, twitter, telegram, etc.)" autofocus>
+            </form>
+        </div>
+    </div>
+
+    <!-- Copied Message Notification -->
+    <div class="copied-message" id="copied-message">Address copied to clipboard!</div>
+
+    <script>
+        // DOM Elements
+        const output = document.getElementById('output');
+        const input = document.getElementById('input');
+        const form = document.getElementById('input-form');
+        const walletAddress = document.getElementById('wallet-address');
+        const copiedMessage = document.getElementById('copied-message');
+        const loadingScreen = document.getElementById('loading-screen');
+
+        // Display Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                output.innerHTML += "Welcome to $TRUMPAI - The Command Center of the AI Trump Coin!<br>";
+                output.innerHTML += "$TRUMPAI: The AI that's really winning!<br>";
+            }, 3000);
+        });
+
+        // Copy Wallet Address
+        walletAddress.addEventListener('click', () => {
+            navigator.clipboard.writeText(walletAddress.textContent).then(() => {
+                copiedMessage.classList.add('show');
+                setTimeout(() => copiedMessage.classList.remove('show'), 2000);
+            });
+        });
+
+        // Command Processing
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const cmd = input.value.trim();
+            output.innerHTML += `> ${cmd}<br>`;
+            handleCommand(cmd.toLowerCase());
+            input.value = '';
+        });
+
+        function handleCommand(cmd) {
+            switch (cmd) {
+                case 'about':
+                    output.innerHTML += "$TRUMPAI: The AI-driven coin making crypto great again.<br>";
+                    break;
+                case 'makeamerica':
+                    output.innerHTML += "Big things are happening. $TRUMPAI is making America great again in the crypto world!<br>";
+                    break;
+                case 'twitter':
+                    window.open('https://x.com/Trump_AI', '_blank');
+                    output.innerHTML += 'Opening Twitter...<br>';
+                    break;
+                case 'telegram':
+                    window.open('https://t.me/TrumpAI', '_blank');
+                    output.innerHTML += 'Opening Telegram...<br>';
+                    break;
+                case 'clear':
+                    output.innerHTML = '';
+                    break;
+                default:
+                    output.innerHTML += "That command makes no sense to me.<br>";
+                    break;
+            }
+            output.scrollTop = output.scrollHeight;
+        }
+
+        // Matrix Background Effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+        const columns = canvas.width / 20;
+        const drops = Array.from({ length: columns }, () => 1);
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ff9900';
+            ctx.font = '15px monospace';
+
+            drops.forEach((drop, i) => {
+                const text = String.fromCharCode(Math.random() * 128);
+                ctx.fillText(text, i * 20, drop * 20);
+                if (drop * 20 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            });
+        }
+
+        resizeCanvas();
+        setInterval(draw, 33);
+        window.addEventListener('resize', resizeCanvas);
+    </script>
+</body>
+</html>
