@@ -82,6 +82,10 @@ body, html {
     border-bottom: 1px solid #ff9900;
     padding-bottom: 10px;
 }
+.terminal-header img {
+    max-width: 150px; /* Adjust this size as needed */
+    height: auto;
+}
 
 /* Text Animations */
 @keyframes textGlow {
@@ -280,9 +284,10 @@ h1 {
     <div class="container">
         <div class="terminal">
             <div class="terminal-header">
-                <h1>$TRUMPAI COMMAND CENTER</h1>
+                <img src="images/logo.png" alt="$TRUMPAI Command Center Logo" style="max-width: 100%; height: auto;">
                 <span class="wallet-address" id="wallet-address" title="Click to copy">45thPresidentBTC4EVERMAGAKeepAmericaGreat2024</span>
             </div>
+            
             <div id="output" class="terminal-output"></div>
             <form id="input-form" class="terminal-input">
                 <span>&gt;</span>
@@ -404,7 +409,7 @@ h1 {
     
         // Function to open Ape Store
         function openApeStore() {
-            window.open('https://ape.store', '_blank');
+            window.open('https://ape.store/base/0xbed38dd3d06a61da73fa06e23d557ecafd0fb5da', '_blank');
             output.innerHTML += "Opening the Ape Store... Time to go bananas! 🦍<br>";
         }
     
